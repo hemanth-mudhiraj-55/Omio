@@ -1,0 +1,74 @@
+body.page-template-velocityai .home_banner_block .home_banner_area {
+    padding: 160px 0 40px;
+    display: block
+}
+
+body.page-template-velocityai .home_banner_block .home_banner_area .gl_velocity h3 {
+    color: #484f6b;
+    font-weight: 600;
+    margin-left: 175px;
+    margin-bottom: 0
+}
+
+body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_1 h1 {
+    color: #fff;
+    justify-content: left;
+    margin-bottom: 0
+}
+
+body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_2 h1 {
+    color: #fff;
+    justify-content: left;
+    margin-left: 156px;
+    margin-bottom: 0
+}
+
+body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_3 h1 {
+    color: #484f6b;
+    justify-content: right;
+    margin-left: 20px
+}
+
+@media screen and (max-width:767px) {
+    body.page-template-velocityai .home_banner_block .home_banner_area .gl_velocity h3 {
+        margin-left: 0;
+        justify-content: left
+    }
+    body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_1 h1 {
+        color: #fff;
+        text-align: left;
+        margin-bottom: 0
+    }
+    body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_2 h1 {
+        color: #fff;
+        justify-content: left;
+        margin-left: 0;
+        margin-bottom: 0
+    }
+    body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_3 h1 {
+        color: #484f6b;
+        text-align: left;
+        margin-left: 0;
+        margin-bottom: 0
+    }
+}
+
+@media only screen and (min-device-width:1025px) and (max-device-width:1399px) {
+    body.page-template-velocityai .home_banner_block .home_banner_area .gl_velocity h3 {
+        color: #484f6b;
+        font-weight: 600;
+        margin-left: 190px;
+        margin-bottom: 0
+    }
+    body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_2 h1 {
+        color: #fff;
+        justify-content: left;
+        margin-left: 190px;
+        margin-bottom: 0
+    }
+    body.page-template-velocityai .home_banner_block .home_banner_area .gl_vl_title_3 h1 {
+        color: #484f6b;
+        justify-content: center;
+        margin-left: 0
+    }
+}

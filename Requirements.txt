@@ -1,0 +1,90 @@
+Design a modern, high-end SaaS Website by following these steps :
+
+
+The total website will be white classic and simple ..., use light brown if needed ...., use a separate file for the colors so what on one change of color code total need to change and have a flexibility to change it.
+And create a separate file to update the image paths and while creating just create a leave the path ..., and command it 
+Landing Page Hero section is like
+Create a clean, minimal, premium UI with a strong focus on typography and spacing
+Use a full-width hero section with a soft gradient or abstract 3D background
+The background is an image , use this image with path  : ..............................................................
+And on the landing page - this text needs to be display - "Omio Solutions/n Think behind /n the /n Human Intelligence" -- the first and last line in it is grey and middle one are in white
+
+2. The Navigation bar need to be in every page, even they direct to different pages it means in section and subsection . The Navigation bar it is almost full width but use padding .., use less padding at the from the top as compared to left and right and  left padding length = Right padding length
+Left: Logo , then a text - "Omio" which is lightly bigger and then under that text is "Software Services" and make sure that .., the height of logo = height of "Omio" + "Software Services" --------- here the logo and text is clickable ..., and by default it is the home page.
+Logo path - S:\Website\Omio\Logo.svg
+Center navigation: Services , Case Studies , Omio ,Career , About us ----------- in this order only and on opening the website it is need to fix the content of Dusker AI only
+Right side:
+Language selector (EN 🌐) -- make the website to display in multiple languages like ,, Global/English, Germany/German , ....../Deutsch, Japan/Japananis, Poland/Polski ,Ukraine/......
+Primary button - where edges are rounded - button name - “Contact”
+Style:
+Sticky navbar
+Light background with slight blur (glass effect)
+on Nav items hover :Design a modern enterprise SaaS navigation system with intelligent mega menu hover interactions, where each navigation item reveals a unique dropdown layout based on its content type.
+On hover of each nav item, show a full-width dropdown panel
+Dropdown:
+Smooth fade + slide (200–300ms)
+Light background (white / soft gray)
+Subtle shadow + divider from navbar
+IMPORTANT: Each menu has a different layout (not fixed grid)
+Structured List Layout of hover nav items
+Layout:
+Left-aligned multi-row list (2-column grid of text items)
+Each item contains:
+Title (bold)
+Short description (muted gray)
+Horizontal divider lines between rows
+
+Right Side:
+One featured visual card ,  
+Image. and its paths are as follows
+for each nav item :
+Services - ...............................................
+Insights - ......................................
+Omio ............................................
+Careers - ................................................
+About us - ............................................
+
+
+And the subsections in the navigation bar is as follows :
+And onclick on section need to open other page and onclick on subsection in sections need to open another , it means for every specific thing has it own page.
+Service 
+Web Development
+Mobile Development
+cloud, DevOps & Custom integration
+AI Agent Evalution & Benchmarking
+Enterprise AI Agents
+Agent Readiness & Risk Assessment
+Continuous Monitoring & Regression Testing
+Supervised Fine-Tuning (SFT) & RLHF
+Staffing
+
+and add you own short description , relative to subtopic 
+
+2. Insights
+Case Studies
+Blogs
+
+and add you own short description relative to subtopic
+
+3. Omio Solutions -
+4.  Careers -
+Life at Omio -
+Open positions
+Benefits
+Professional Development
+
+5.About
+Who we are..??
+Leadership
+Partners
+Location
+
+...........................................................................................................................
+First create the above mentioned section then i give you the description of every page need to develop.
+
+use - jsx, for frontend and seperate css file for it . and node.js for the backend 
+
+write the 3 seperate blogs on Enterprise AI agents , AI agent evaluation and benchmarking and web            
+  development ---- follow Search engine optimization rules such that our website needs to rank 1 on google     
+  search about this topics. and write blogs like /human . leave space for images and later will be uploaded 
+

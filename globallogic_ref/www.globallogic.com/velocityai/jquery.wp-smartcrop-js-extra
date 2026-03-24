@@ -1,0 +1,4 @@
+window.addEventListener('DOMContentLoaded', function() {
+var wpsmartcrop_options = {"focus_mode":"power-lines"};
+//# sourceURL=jquery.wp-smartcrop-js-extra
+});

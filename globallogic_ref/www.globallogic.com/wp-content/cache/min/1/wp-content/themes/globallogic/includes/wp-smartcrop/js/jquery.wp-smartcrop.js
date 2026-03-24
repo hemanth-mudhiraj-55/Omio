@@ -1,0 +1,213 @@
+(function($) {
+    $.fn.extend({
+        'wpsmartcrop': function(options) {
+            var options = $.extend({
+                'focal_point': null,
+                'compatibility': null,
+                'focus_mode': 'power-lines'
+            }, options);
+            var lastTime = 0;
+            var vendors = ['webkit', 'moz'];
+            var requestFrame = window.requestAnimationFrame;
+            var cancelFrame = window.cancelAnimationFrame;
+            for (var x = 0; x < vendors.length && !requestFrame; ++x) {
+                requestFrame = window[vendors[x] + 'RequestAnimationFrame'];
+                cancelFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame']
+            }
+            if (!requestFrame) {
+                requestFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() {
+                        callback(currTime + timeToCall)
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id
+                }
+            }
+            if (!cancelFrame) {
+                cancelFrame = function(id) {
+                    clearTimeout(id)
+                }
+            }
+            var browser_supports_object_fit = (function() {
+                var div = document.createElement("div");
+                if ("objectFit" in div.style && "objectPosition" in div.style) {
+                    return !0
+                }
+                if ("OobjectFit" in div.style && "OobjectPosition" in div.style) {
+                    return !0
+                }
+                return !1
+            })();
+
+            function closest(num, arr) {
+                var curr = arr[0];
+                var diff = Math.abs(num - curr);
+                for (var val = 0; val < arr.length; val++) {
+                    var newdiff = Math.abs(num - arr[val]);
+                    if (newdiff < diff) {
+                        diff = newdiff;
+                        curr = arr[val]
+                    }
+                }
+                return curr
+            }
+
+            function get_final_image_dims(natural_dims, target_dims) {
+                var natural_ratio = natural_dims[0] / natural_dims[1];
+                var target_ratio = target_dims[0] / target_dims[1];
+                if (natural_ratio > target_ratio) {
+                    return [Math.round(target_dims[1] * natural_ratio), target_dims[1]]
+                }
+                return [target_dims[0], Math.round(target_dims[0] / natural_ratio)]
+            }
+
+            function get_crop_data($el) {
+                var get_smartcrop_offset = function(dim, orig_dim, focus_pos, focus_mode) {
+                    if (!focus_mode) {
+                        focus_mode = 'power-lines'
+                    }
+                    focus_pos = focus_pos / 100;
+                    var focus_target = focus_pos,
+                        max = orig_dim - dim,
+                        offset;
+                    if (focus_mode == 'power-lines') {
+                        focus_target = closest(focus_pos, [.33333, .5, .66667])
+                    }
+                    offset = Math.round(focus_pos * orig_dim - focus_target * dim);
+                    if (offset > max) {
+                        offset = max
+                    }
+                    if (offset < 0) {
+                        offset = 0
+                    }
+                    return -1 * offset
+                };
+                var focal_point = $el.data('smartcrop-focus'),
+                    focus_mode = $el.data('smartcrop-mode'),
+                    natural_dims = [($el[0].naturalWidth) ? $el[0].naturalWidth : $el[0].getAttribute('width'), ($el[0].naturalHeight) ? $el[0].naturalHeight : $el[0].getAttribute('height')],
+                    target_dims = [$el.width(), $el.height()],
+                    final_dims = get_final_image_dims(natural_dims, target_dims),
+                    offsets = [0, 0];
+                if (!focal_point) {
+                    focal_point = options.focal_point
+                }
+                if (!focal_point || focal_point.length < 2 || !natural_dims[0] || !natural_dims[1] || !target_dims[0] || !target_dims[1]) {
+                    return !1
+                }
+                if (!focus_mode) {
+                    if (typeof window.wpsmartcrop_focus_mode !== 'undefined') {
+                        focus_mode = options.focus_mode
+                    } else {
+                        focus_mode = "power-lines"
+                    }
+                }
+                if (target_dims[0] / target_dims[1] < final_dims[0] / final_dims[1]) {
+                    offsets[0] = get_smartcrop_offset(target_dims[0], final_dims[0], focal_point[0], focus_mode)
+                } else {
+                    offsets[1] = get_smartcrop_offset(target_dims[1], final_dims[1], focal_point[1], focus_mode)
+                }
+                return {
+                    final_width: final_dims[0],
+                    final_height: final_dims[1],
+                    offset_x: offsets[0],
+                    offset_y: offsets[1]
+                }
+            }
+
+            function recrop_images($el, use_object_fit) {
+                var crop = get_crop_data($el);
+                if (use_object_fit) {
+                    var position_val = '' + crop.offset_x + 'px ' + '' + crop.offset_y + 'px';
+                    $el.css({
+                        '-o-object-position': position_val,
+                        'object-position': position_val
+                    });
+                    $el.addClass('wpsmartcrop-rendered')
+                } else {
+                    var img_pos = $el.position();
+                    var $overlay = $el.next('.wpsmartcrop-overlay');
+                    var $overlay_img = $overlay.find('img');
+                    $overlay.css({
+                        'width': $el.width() + 'px',
+                        'height': $el.height() + 'px',
+                        'top': img_pos.top + 'px',
+                        'left': img_pos.left + 'px',
+                    });
+                    $overlay_img.css({
+                        'width': crop.final_width + 'px',
+                        'height': crop.final_height + 'px',
+                        'top': crop.offset_y + 'px',
+                        'left': crop.offset_x + 'px',
+                    });
+                    $overlay.addClass('wpsmartcrop-overlay-rendered')
+                }
+            }
+            return this.each(function() {
+                var $this = $(this);
+                if (!$this.is('img')) {
+                    return
+                }
+                var natural_dims = [($this[0].naturalWidth) ? $this[0].naturalWidth : $this[0].getAttribute('width'), ($this[0].naturalHeight) ? $this[0].naturalHeight : $this[0].getAttribute('height')];
+                if (natural_dims[0] == 0 || natural_dims[1] == 0) {
+                    return
+                }
+                $this.data('wpsmartcrop-natural-dims', natural_dims);
+                $this.next('wpsmartcrop-overlay').remove();
+                if (options.focal_point) {
+                    $this.data('smartcrop-focus', options.focal_point)
+                } else {
+                    if (!$this.data('smartcrop-focus')) {
+                        $this.data('smartcrop-focus', [50, 50])
+                    }
+                }
+                var use_object_fit = !0;
+                if (options.compatibility != 'new') {
+                    if ((options.compatibility == 'old') || !browser_supports_object_fit) {
+                        use_object_fit = !1;
+                        var $clone = $this.clone().removeClass('wpsmartcrop-image').removeAttr('data-smartcrop-focus');
+                        var $image_overlay = $('<div></div>').addClass('wpsmartcrop-overlay').append($clone);
+                        $image_overlay.insertAfter($this)
+                    }
+                }
+                recrop_images($this, use_object_fit);
+                var resizer_frame_request = !1;
+                $(window).resize(function() {
+                    cancelFrame(resizer_frame_request);
+                    resizer_frame_request = requestFrame(function() {
+                        recrop_images($this, use_object_fit)
+                    })
+                });
+                $(window).on('load', function() {
+                    recrop_images($this, use_object_fit)
+                });
+                $this.on('wpsmartcrop-redraw', function() {
+                    recrop_images($this, use_object_fit)
+                })
+            })
+        }
+    })
+}(jQuery));
+jQuery(document).ready(function($) {
+    if (typeof wpsmartcrop_options === 'undefined') {
+        wpsmartcrop_options = {}
+    }
+    var init = function() {
+        $('img.wpsmartcrop-image').wpsmartcrop(wpsmartcrop_options)
+    };
+    init();
+    var ua = ua || navigator.userAgent;
+    var isIE11 = ua.indexOf('Trident/7') !== -1;
+    if ("MutationObserver" in window && !isIE11) {
+        var mutationObserver = new MutationObserver(function(mutations) {
+            init()
+        });
+        mutationObserver.observe(document.documentElement, {
+            attributes: !1,
+            characterData: !1,
+            childList: !0,
+            subtree: !0,
+        })
+    }
+})

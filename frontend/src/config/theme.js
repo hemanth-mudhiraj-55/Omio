@@ -1,0 +1,33 @@
+export const lightColors = {
+  pageBackground: '#f4f8ff',
+  surface: 'rgba(255, 255, 255, 0.85)',
+  surfaceStrong: '#ffffff',
+  surfaceSoft: 'rgba(241, 245, 255, 0.92)',
+  border: 'rgba(37, 99, 235, 0.12)',
+  borderStrong: 'rgba(37, 99, 235, 0.22)',
+  textPrimary: '#0f172a',
+  textMuted: '#475569',
+  textSubtle: '#94a3b8',
+  accent: '#2563eb',
+  accentDeep: '#1e40af',
+  accentSoft: '#dbeafe',
+  white: '#ffffff',
+  shadow: '0 20px 60px rgba(37, 99, 235, 0.15)',
+};
+
+export const darkColors = {
+  pageBackground: '#07111f',
+  surface: 'rgba(11, 23, 42, 0.82)',
+  surfaceStrong: '#0f1b31',
+  surfaceSoft: 'rgba(17, 32, 59, 0.92)',
+  border: 'rgba(96, 165, 250, 0.18)',
+  borderStrong: 'rgba(96, 165, 250, 0.3)',
+  textPrimary: '#eff6ff',
+  textMuted: '#bfd2f3',
+  textSubtle: '#7f96bf',
+  accent: '#60a5fa',
+  accentDeep: '#93c5fd',
+  accentSoft: 'rgba(59, 130, 246, 0.18)',
+  white: '#ffffff',
+  shadow: '0 20px 60px rgba(2, 8, 23, 0.45)',
+};
