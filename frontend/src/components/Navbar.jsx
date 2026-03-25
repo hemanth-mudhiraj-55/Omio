@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { imagePaths } from '../config/imagePaths';
 import { useSite } from '../context/SiteContext';
 import { getLocalizedContent } from '../data/localizedContent';
@@ -8,6 +8,12 @@ function Navbar() {
   const [activeGroup, setActiveGroup] = useState(null);
   const { language, setLanguage, theme, toggleTheme } = useSite();
   const { common, navigationGroups, supportedLanguages } = getLocalizedContent(language);
+  const location = useLocation();
+
+  // Close mega menu whenever the route changes
+  useEffect(() => {
+    setActiveGroup(null);
+  }, [location.pathname]);
 
   const currentGroup =
     navigationGroups.find((group) => group.key === activeGroup) ?? navigationGroups[0];
@@ -32,7 +38,12 @@ function Navbar() {
               className="nav-item"
               onMouseEnter={() => setActiveGroup(group.key)}
             >
-              <NavLink to={group.path}>{group.label}</NavLink>
+              <NavLink
+                to={group.path}
+                onClick={() => setActiveGroup(null)}
+              >
+                {group.label}
+              </NavLink>
             </div>
           ))}
         </nav>
@@ -69,9 +80,9 @@ function Navbar() {
               </svg>
             )}
           </button>
-          <a className="contact-button" href="mailto:hello@omiosolutions.com">
+          <Link className="contact-button" to="/contact">
             {common.contact}
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -85,12 +96,14 @@ function Navbar() {
             <h3>{currentGroup.featuredTitle}</h3>
             <p>{currentGroup.description}</p>
           </div>
-          {currentGroup.items.map((item) => (
-            <Link key={item.path} className="mega-link" to={item.path} onClick={() => setActiveGroup(null)}>
-              <span>{item.title}</span>
-              <small>{item.description}</small>
-            </Link>
-          ))}
+          <div className="mega-links-grid">
+            {currentGroup.items.map((item) => (
+              <Link key={item.path} className="mega-link" to={item.path} onClick={() => setActiveGroup(null)}>
+                <span>{item.title}</span>
+                <small>{item.description}</small>
+              </Link>
+            ))}
+          </div>
         </div>
         <div className="mega-card">
           <div className="mega-card-visual">

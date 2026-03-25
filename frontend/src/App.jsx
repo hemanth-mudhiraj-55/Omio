@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage';
 import ContentPage from './pages/ContentPage';
 import BlogsPage from './pages/BlogsPage';
 import BlogPost from './pages/BlogPost';
+import ContactPage from './pages/ContactPage';
+import AboutPage from './pages/AboutPage';
 import { darkColors, lightColors } from './config/theme';
 import { useSite } from './context/SiteContext';
 import { routeOrder } from './data/siteContent';
@@ -29,6 +31,8 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="/insights/blogs" element={<BlogsPage />} />
         <Route path="/insights/blogs/:slug" element={<BlogPost />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about/who-we-are" element={<AboutPage />} />
         {routeOrder.map((route) => (
           <Route key={route.path} path={route.path} element={<ContentPage />} />
         ))}

@@ -177,8 +177,7 @@ export const heroContent = {
   titleLines: [
     { text: 'Think behind', tone: 'muted' },
     { text: 'the', tone: 'light' },
-    { text: 'human', tone: 'muted' },
-    { text: 'intelligence', tone: 'muted' },
+    { text: 'Human intelligence', tone: 'muted' },
   ],
   description:
     'Enterprise-grade software services shaped around intelligent systems, modern delivery, and calm, precise execution.',
