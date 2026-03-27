@@ -233,7 +233,7 @@ const heroDescriptionMap = {
 const phraseMap = {
   'Think behind': { en: 'Think behind', de: 'Denken hinter', ja: '人の知性の', pl: 'Myśl stojąca za', uk: 'Думка за' },
   the: { en: 'the', de: 'der', ja: 'その', pl: 'ludzkiej', uk: 'людського' },
-  'Human intelligence': { en: 'Human intelligence', de: 'menschlicher Intelligenz', ja: '人間の知性', pl: 'inteligencji ludzkiej', uk: 'людським інтелектом' },
+  'Artificial intelligence': { en: 'Artificial intelligence', de: 'Künstlicher Intelligenz', ja: '人工知能', pl: 'sztuczną inteligencją', uk: 'штучним інтелектом' },
 };
 
 /* ─────────────────────────────────────────────────
@@ -571,6 +571,16 @@ const navItemTranslations = {
       ja: '特化したモメンタムを必要とするDeliveryチームへの柔軟なエンジニアリングサポート。',
       pl: 'Elastyczne wsparcie inżynieryjne dla zespołów delivery potrzebujących wyspecjalizowanego momentum.',
       uk: 'Гнучка інженерна підтримка для delivery-команд, яким потрібен спеціалізований momentum.',
+    },
+  },
+  '/insights/articles': {
+    title: { en: 'Articles', de: 'Artikel', ja: '記事', pl: 'Artykuły', uk: 'Статті' },
+    description: {
+      en: "In-depth reads on software startups, industry trends, and Omio's perspective on technology.",
+      de: 'Ausführliche Artikel über Software-Startups, Branchentrends und Omios Technologieperspektive.',
+      ja: 'ソフトウェアスタートアップ、業界トレンド、Omioの技術的視点についての詳細な読み物。',
+      pl: 'Szczegółowe artykuły o startupach software, trendach branżowych i perspektywie Omio na technologię.',
+      uk: 'Детальні матеріали про software-стартапи, галузеві тренди та технологічну перспективу Omio.',
     },
   },
   '/insights/case-studies': {

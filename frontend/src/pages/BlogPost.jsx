@@ -2,7 +2,31 @@ import { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { getBlogPost } from '../data/blogPosts';
 
-function ImagePlaceholder({ alt, caption }) {
+function VideoPlaceholder({ title, caption }) {
+  return (
+    <figure className="blog-video-placeholder">
+      <div className="blog-video-frame" role="img" aria-label={title}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="10 8 16 12 10 16 10 8"/>
+        </svg>
+        <p>{title}</p>
+        <small>Video embed coming soon</small>
+      </div>
+      {caption && <figcaption className="blog-video-caption">{caption}</figcaption>}
+    </figure>
+  );
+}
+
+function ImagePlaceholder({ alt, caption, src }) {
+  if (src) {
+    return (
+      <figure className="blog-image">
+        <img src={src} alt={alt} loading="lazy" width="800" height="450" />
+        {caption && <figcaption>{caption}</figcaption>}
+      </figure>
+    );
+  }
   return (
     <figure className="blog-image-placeholder">
       <div className="blog-image-placeholder__frame" role="img" aria-label={alt}>
@@ -39,9 +63,29 @@ function Block({ block }) {
         </ol>
       );
     case 'image':
-      return <ImagePlaceholder alt={block.alt} caption={block.caption} />;
+      return <ImagePlaceholder alt={block.alt} caption={block.caption} src={block.src} />;
     case 'callout':
       return <blockquote className="blog-callout">{block.text}</blockquote>;
+    case 'highlight':
+      return <p className="blog-highlight"><strong>{block.text}</strong></p>;
+    case 'video':
+      return <VideoPlaceholder title={block.title} caption={block.caption} />;
+    case 'links':
+      return (
+        <div className="blog-links-section">
+          {block.heading && <p className="blog-links-heading">{block.heading}</p>}
+          <ul className="blog-links-list">
+            {block.items.map((item, i) => (
+              <li key={i}>
+                {item.external
+                  ? <a href={item.href} target="_blank" rel="noopener noreferrer" className="blog-link-item">{item.text}</a>
+                  : <Link to={item.href} className="blog-link-item">{item.text}</Link>
+                }
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
     case 'faq':
       return (
         <section className="blog-faq" id={block.id} aria-labelledby={`${block.id}-heading`}>
@@ -75,9 +119,31 @@ function BlogPost() {
         document.head.appendChild(metaDesc);
       }
       metaDesc.content = post.metaDescription;
+
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.metaDescription,
+        author: { '@type': 'Organization', name: 'Omio Solutions', url: 'https://omiosolutions.com' },
+        publisher: { '@type': 'Organization', name: 'Omio Solutions', url: 'https://omiosolutions.com' },
+        datePublished: post.publishDate,
+        keywords: post.tags ? post.tags.join(', ') : '',
+        url: `https://omiosolutions.com${post.path}`,
+      };
+      let schemaScript = document.getElementById('blog-jsonld');
+      if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = 'blog-jsonld';
+        schemaScript.type = 'application/ld+json';
+        document.head.appendChild(schemaScript);
+      }
+      schemaScript.textContent = JSON.stringify(schema);
     }
     return () => {
       document.title = 'Omio Solutions';
+      const schemaScript = document.getElementById('blog-jsonld');
+      if (schemaScript) schemaScript.remove();
     };
   }, [post]);
 

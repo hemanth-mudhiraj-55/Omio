@@ -81,9 +81,10 @@ export const contactChannels = [
 ];
 
 export const socialLinks = [
-  { key: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/company/omio-solutions' },
-  { key: 'github', label: 'GitHub', url: 'https://github.com/omio-solutions' },
-  { key: 'twitter', label: 'X / Twitter', url: 'https://twitter.com/omiosolutions' },
+  { key: 'linkedin', label: 'LinkedIn', url: '' },
+  { key: 'instagram', label: 'Instagram', url: '' },
+  { key: 'twitter', label: 'X / Twitter', url: '' },
+  { key: 'facebook', label: 'Facebook', url: '' },
 ];
 
 export const companyInfo = {

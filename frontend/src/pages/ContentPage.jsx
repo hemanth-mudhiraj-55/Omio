@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import SectionIntro from '../components/SectionIntro';
 import { useSite } from '../context/SiteContext';
 import { getLocalizedContent } from '../data/localizedContent';
@@ -31,21 +31,43 @@ function ContentPage() {
         {pageImage && <img src={pageImage} alt={page.title} />}
       </div>
 
-      <section className="content-grid">
-        <article className="overview-card overview-card--wide">
-          <p className="section-eyebrow">{page.group}</p>
-          <h2>{common.contentReady}</h2>
-          <p>{common.contentBody}</p>
-        </article>
+      {page.body && (
+        <section className="content-body-section">
+          <p>{page.body}</p>
+        </section>
+      )}
 
-        {page.highlights.map((highlight) => (
-          <article key={highlight} className="overview-card">
-            <p className="section-eyebrow">{common.highlight}</p>
-            <h3>{highlight}</h3>
-            <p>{common.highlightBody}</p>
-          </article>
-        ))}
-      </section>
+      {page.details && page.details.length > 0 && (
+        <div className="content-details-grid">
+          {page.details.map((detail) => (
+            <div key={detail.heading} className="content-detail-card">
+              <p className="section-eyebrow">{detail.heading}</p>
+              <p>{detail.text}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {page.highlights && page.highlights.length > 0 && (
+        <div className="content-highlights-grid">
+          {page.highlights.map((highlight) => (
+            <span key={highlight} className="content-highlight-chip">{highlight}</span>
+          ))}
+        </div>
+      )}
+
+      {page.links && page.links.length > 0 && (
+        <div className="content-article-list">
+          {page.links.map((link) => (
+            <Link key={link.slug} to={`/insights/articles/${link.slug}`} className="content-article-card">
+              <span className="content-article-category">{link.category}</span>
+              <h3>{link.title}</h3>
+              <p>{link.intro}</p>
+              <span className="content-article-read-time">{link.readTime}</span>
+            </Link>
+          ))}
+        </div>
+      )}
 
     </div>
   );

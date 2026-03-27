@@ -88,3 +88,7 @@ write the 3 seperate blogs on Enterprise AI agents , AI agent evaluation and ben
   development ---- follow Search engine optimization rules such that our website needs to rank 1 on google     
   search about this topics. and write blogs like /human . leave space for images and later will be uploaded 
 
+
+replace the name of subsection - "Mobile Development " with android development . and make  
+  the items in the footer clickable , and design the appropriate pages for then , and route    
+  to them.       

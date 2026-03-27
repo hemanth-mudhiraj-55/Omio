@@ -1,1 +1,0 @@
-No Content: https://www.globallogic.com/wp-content/themes/globallogic/js/my-ajax-script.js

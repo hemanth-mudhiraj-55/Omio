@@ -1,1 +1,0 @@
-No Content: https://www.globallogic.com/wp-content/themes/globallogic/blocks/about-impact-block/about-impact-block.js?ver=6.9.1

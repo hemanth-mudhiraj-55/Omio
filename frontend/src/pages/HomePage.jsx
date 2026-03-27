@@ -21,12 +21,10 @@ function HomePage() {
   return (
     <div className="page-stack">
 
-      <section
-        className="hero-section"
-        style={imagePaths.heroBackground ? {
-          backgroundImage: `url(${imagePaths.heroBackground})`,
-        } : undefined}
-      >
+      <section className="hero-section">
+        {imagePaths.heroBackground && (
+          <img className="hero-bg" src={imagePaths.heroBackground} alt="" aria-hidden="true" />
+        )}
         <div className="hero-panel">
           <div className="hero-copy">
             <p className="section-eyebrow">{heroContent.eyebrow}</p>
@@ -38,14 +36,14 @@ function HomePage() {
               ))}
             </h1>
             <p className="hero-description">{heroContent.description}</p>
-            <div className="hero-stats">
-              {homeStats.map((item) => (
-                <div key={item.label} className="hero-stat">
-                  <strong>{item.value}</strong>
-                  <span>{item.label}</span>
-                </div>
-              ))}
-            </div>
+          </div>
+          <div className="hero-stats">
+            {homeStats.map((item) => (
+              <div key={item.label} className="hero-stat">
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

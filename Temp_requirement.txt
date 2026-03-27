@@ -1,3 +1,13 @@
-write the 3 seperate blogs on Enterprise AI agents , AI agent evaluation and benchmarking and web            
-  development ---- follow Search engine optimization rules such that our website needs to rank 1 on google     
-  search about this topics. and write blogs like /human . leave space for images and later will be uploaded 
+Omio works with both.
+For startups, Omio often functions as an outsourced CTO and delivery partner combined —        providing strategic engineering direction and hands-on execution. This gives founders access
+  to senior engineering depth without the full-time hiring cost, at the stage when capital     
+  efficiency matters most and the cost of an architectural mistake is highest.                 
+
+  For enterprise clients, Omio provides specialist AI capability, platform engineering depth,    and senior staffing that in-house teams cannot build fast enough to meet their current
+  timeline.                                                                                    
+
+  For scale-ups, Omio helps teams whose systems have outgrown their original architecture —      where performance is degrading, the codebase has become hard to change safely, and the team
+  is spending more time firefighting than building.                                            
+                                                                                               
+  What all Omio clients share is not a company size — it is that they are attempting something   technically demanding and want a delivery partner who will approach it seriously and stay
+  accountable to the outcome. 
